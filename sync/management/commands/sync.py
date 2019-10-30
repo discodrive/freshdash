@@ -1,4 +1,4 @@
-import requests
+from sync.models import API
 from django.core.management.base import BaseCommand, CommandError
 
 class Command(BaseCommand):
@@ -11,13 +11,5 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        r = requests.get(
-            'https://substrakt.freshdesk.com/api/v2/'+ options['endpoint'],
-            # authentication needs to come from env
-            auth=("5TZvLFZ9pqTpCtdw1C", "x")
-        )
-        
-        if r.status_code == 200:
-            return r.json()
-
-        return False
+        api = API('freshdesk')
+        return api.sync(api.get(options['endpoint']))

@@ -1,0 +1,39 @@
+.state--client-grid {
+    .c-single-client {
+        .inner {
+            border:2px solid #f5f5f5;
+            &.status-over {
+                border-top:4px solid $red;
+            }
+            &.status-under {
+                border-top:4px solid $green;
+            }
+        }
+        .columns {
+            flex-direction:column;
+            .c-client-name, .c-client-time, .c-client-status {
+                width:100%;
+            }
+        }
+    }
+}
+
+.state--client-list {
+    .c-single-client {
+        .inner {
+            border:2px solid #f5f5f5;
+            &.status-over {
+                border:2px solid $red;
+            }
+            &.status-under {
+                border:2px solid $green;
+            }
+        }
+    }
+}
+
+ul {
+    li {
+        margin-bottom:2rem;
+    }
+}
