@@ -2,18 +2,20 @@ from django.shortcuts import render
 from django.http import Http404, JsonResponse
 from dashboard.models import Client
 
+
 def index(request):
     sort_by = {
         'name' : 'name',
-        'time' : 'hours_remaining',
-        'status' : 'status'
+        'time' : 'time_spent',
+        'owner' : 'project_owner'
     }
 
     query = request.GET.dict()
     clients = Client.objects.all()
 
-    # for key, value in sort_by.items():
-    #     if query and query['sort'] == key:
+    for key, value in sort_by.items():
+        if query and query['sort'] == key:
+            clients = clients.order_by(value)
             # clients.sort(key=lambda x: getattr(x, value)())
 
     context = {'clients': clients}

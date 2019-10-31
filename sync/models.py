@@ -3,7 +3,7 @@ import requests
 from datetime import timedelta
 from django.db import models
 from dashboard.models import Client
-from dashboard.helpers import monthFirstDay
+from dashboard.helpers import month_first_day
 
 class API(models.Model):
     
@@ -36,9 +36,10 @@ class API(models.Model):
 
             c = Client(
                 client_id=client['id'], 
-                name=client['name'], 
+                name=client['name'],
+                project_owner=client['custom_fields']['client_owner'],
                 sla_hours=client['custom_fields']['sla_allowance_hours'], 
-                time_spent=self._time_by_client(str(client['id']), str(monthFirstDay()))
+                time_spent=self._time_by_client(str(client['id']), str(month_first_day()))
             )
             c.save()
 
