@@ -32,6 +32,9 @@ class API(models.Model):
             if client['custom_fields']['sla_allowance_hours'] is None:
                 client['custom_fields']['sla_allowance_hours'] = 0
 
+            if client['custom_fields']['client_owner'] is None:
+                client['custom_fields']['client_owner'] = 'No owner'
+
             print(f"Importing {client['name']}")
 
             c = Client(

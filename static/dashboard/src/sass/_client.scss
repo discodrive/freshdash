@@ -1,3 +1,23 @@
+.state--client-grid, .state--client-list {
+    .c-single-client {
+        .inner {
+            &.status-pause {
+                background:#ECF0F1;
+                color:#bbbbbb;
+                position:relative;
+                .subtitle, span {
+                    color:#bbbbbb;
+                }
+                &:before {
+                    content:"\f28b";
+                    font-family: "FontAwesome";
+                }
+            }
+            
+        }
+    }
+}
+
 .state--client-grid {
     .c-single-client {
         .inner {

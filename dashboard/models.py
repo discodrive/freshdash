@@ -46,8 +46,10 @@ class Client(models.Model):
                 return 'warning'
             elif (p >= 25) and (p > 0) and week_of_month() > 2:
                 return 'critical'
-            elif p <= 15:
+            elif (p <= 15) and (p > 0):
                 return 'fine'
+            elif (p == 0):
+                return 'pause'
         return 'default'
 
     def time_percentage(self):
