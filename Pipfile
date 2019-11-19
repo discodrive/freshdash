@@ -9,9 +9,9 @@ pylint = "*"
 [packages]
 django = "*"
 requests = "*"
-psycopg2 = "*"
 psycopg2-binary = "*"
 environ = "*"
+django-dotenv = "*"
 
 [requires]
 python_version = "3.7"

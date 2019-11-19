@@ -1,4 +1,5 @@
 import requests
+import os
 
 from datetime import timedelta
 from django.db import models
@@ -17,8 +18,7 @@ class API(models.Model):
     def get(self, endpoint: str = ''):
         r = requests.get(
             "https://substrakt.freshdesk.com/api/v2/"+ endpoint,
-            # authentication needs to come from env
-            auth=("5TZvLFZ9pqTpCtdw1C", "x")
+            auth=(os.getenv("FRESHDESK_AUTH"), "x")
         )
         
         if r.status_code == 200:
