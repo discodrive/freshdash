@@ -13,6 +13,7 @@ psycopg2-binary = "*"
 environ = "*"
 django-dotenv = "*"
 gunicorn = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"
