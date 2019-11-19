@@ -14,6 +14,7 @@ environ = "*"
 django-dotenv = "*"
 gunicorn = "*"
 dj-database-url = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"
