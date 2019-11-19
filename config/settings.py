@@ -25,7 +25,10 @@ SECRET_KEY = 'qjibdj8^c9230vog!#7%&h8bc9lymuuey+m7d1wfcnz8_#6=*b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'freshdash.substrakt.com',
+    'freshdash-live.herokuapp.com',
+]
 
 
 # Application definition
