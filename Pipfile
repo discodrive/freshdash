@@ -12,6 +12,7 @@ requests = "*"
 psycopg2-binary = "*"
 environ = "*"
 django-dotenv = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
