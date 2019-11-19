@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,6 +27,7 @@ SECRET_KEY = 'qjibdj8^c9230vog!#7%&h8bc9lymuuey+m7d1wfcnz8_#6=*b'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'freshdash.substrakt.com',
     'freshdash-live.herokuapp.com',
 ]
@@ -80,15 +82,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "freshdesk",
-        "USER": "postgres",
-        "PASSWORD": "sxlgglei",
-        "HOST": "127.0.0.1",
-        "PORT": "5432"
+        
     }
 }
 
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
