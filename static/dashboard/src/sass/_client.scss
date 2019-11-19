@@ -8,9 +8,15 @@
                 .subtitle, span {
                     color:#bbbbbb;
                 }
+                .c-client-name {
+                    padding-left:50px;
+                }
                 &:before {
                     content:"\f28b";
                     font-family: "FontAwesome";
+                    font-size:1.6em;
+                    margin-top:-3px;
+                    position:absolute;
                 }
             }
             
