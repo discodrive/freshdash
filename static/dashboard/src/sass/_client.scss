@@ -9,7 +9,9 @@
                     color:#bbbbbb;
                 }
                 .c-client-name {
-                    padding-left:50px;
+                    h2 {
+                        padding-left:50px;
+                    }
                 }
                 &:before {
                     content:"\f28b";
