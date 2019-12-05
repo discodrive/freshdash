@@ -1,4 +1,5 @@
 {% extends "dashboard/base.html" %}
+{% load widget_tweaks %}
         
 {% block title %}Clients{% endblock %}
 
@@ -21,16 +22,16 @@
                     <div class="field">
                         <label class="label">{{ form.username.label_tag }}</label>
                         <div class="control">
-                            {{ form.username }}
+                            {{ form.username|add_class:"input" }}
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">{{ form.password.label_tag }}</label>
                         <div class="control">
-                            {{ form.password }}
+                            {{ form.password|add_class:"input" }}
                         </div>
                     </div>
-                    <input type="submit" value="login" />
+                    <input type="submit" value="login" class="button is-link" />
                     <input type="hidden" name="next" value="{{ next }}" />
                 </form>
                 
