@@ -1,0 +1,42 @@
+{% extends "dashboard/base.html" %}
+        
+{% block title %}Clients{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <div class="med-padding">
+                <h1 class="title is-3">Login</h1>
+
+                {% if form.errors %}
+                    <article class="message is-danger">
+                        <div class="message-body">Your username and password didn't match. Please try again.</div>
+                    </article>
+                {% endif %}
+            </div>
+
+            <div class="med-padding">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label class="label">{{ form.username.label_tag }}</label>
+                        <div class="control">
+                            {{ form.username }}
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">{{ form.password.label_tag }}</label>
+                        <div class="control">
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <input type="submit" value="login" />
+                    <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+                
+                {# Assumes you setup the password_reset view in your URLconf #}
+                <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
