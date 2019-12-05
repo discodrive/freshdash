@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import Http404, JsonResponse
+from django.contrib.auth.decorators import login_required
 from dashboard.models import Client
 
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     sort_by = {
         'name' : 'name',
