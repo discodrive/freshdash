@@ -17,7 +17,7 @@ class API(models.Model):
 
     def get(self, endpoint: str = ''):
         r = requests.get(
-            "https://substrakt.freshdesk.com/api/v2/"+ endpoint,
+            "https://substrakt.freshdesk.com/api/v2/"+ endpoint + "?per_page=50",
             auth=(os.getenv("FRESHDESK_AUTH"), "x")
         )
         
