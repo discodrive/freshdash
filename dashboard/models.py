@@ -26,7 +26,12 @@ class Client(models.Model):
                 f'{self.name!r}, {self.status!r})')
 
     def hours_remaining(self):
-        return float(self.sla_hours) - float(self.time_spent)
+        total = float(self.sla_hours) - float(self.time_spent)
+
+        if (self.extra_hours):
+            return total + self.extra_hours
+
+        return total
 
     def hours_remaining_label(self):
         hours = self.hours_remaining()
@@ -35,6 +40,9 @@ class Client(models.Model):
             return f"{abs(hours)} hours over"
         else:
             return f"{hours} hours remaining"
+
+    def sla_hours_label(self):
+        return self.sla_hours + self.extra_hours
 
 
     def status(self):
