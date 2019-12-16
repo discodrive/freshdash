@@ -17,7 +17,7 @@ class API(models.Model):
 
     def get(self, endpoint: str = ''):
         r = requests.get(
-            "https://substrakt.freshdesk.com/api/v2/"+ endpoint,
+            "https://substrakt.freshdesk.com/api/v2/"+ endpoint + "?per_page=50",
             auth=(os.getenv("FRESHDESK_AUTH"), "x")
         )
         
@@ -49,7 +49,7 @@ class API(models.Model):
     def _time_by_client(self, client_id: str, start_time: str = ''):
         """Returns total tracked for for a client converted to minutes"""
         r = self.get(
-            f"time_entries?company_id={client_id}&executed_after={start_time}&per_page=50"
+            f"time_entries?company_id={client_id}&executed_after={start_time}"
         )
         total = 0
 
