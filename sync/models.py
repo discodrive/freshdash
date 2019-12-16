@@ -49,7 +49,7 @@ class API(models.Model):
     def _time_by_client(self, client_id: str, start_time: str = ''):
         """Returns total tracked for for a client converted to minutes"""
         r = self.get(
-            f"time_entries?company_id={client_id}&executed_after={start_time}"
+            f"time_entries?company_id={client_id}&executed_after={start_time}&per_page=50"
         )
         total = 0
 
