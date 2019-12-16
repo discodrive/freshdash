@@ -15,9 +15,9 @@ class API(models.Model):
         return (f'{self.__class__.__name__}('
                 f'{self.name!r})')
 
-    def get(self, endpoint: str = ''):
+    def get(self, endpoint: str = '', perpage: str = ''):
         r = requests.get(
-            "https://substrakt.freshdesk.com/api/v2/"+ endpoint + "?per_page=50",
+            "https://substrakt.freshdesk.com/api/v2/"+ endpoint + perpage,
             auth=(os.getenv("FRESHDESK_AUTH"), "x")
         )
         
