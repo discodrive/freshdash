@@ -8,7 +8,6 @@ from dashboard.helpers import week_of_month
 class Client(models.Model):
     
     client_id = models.BigIntegerField(primary_key=True, default=0)
-    extra_hours = models.IntegerField(default=0)
     name = models.CharField(
         default="Client Name", max_length=500, verbose_name="Client Name"
     )
@@ -69,4 +68,9 @@ class Client(models.Model):
 
         return 0
 
-    
+
+class ClientTime(models.Model):
+
+    client = models.ForeignKey(Client, primary_key=True, default=0, on_delete=models.CASCADE)
+    leftover_hours = models.IntegerField(default=0)
+    extra_hours = models.IntegerField(default=0)
