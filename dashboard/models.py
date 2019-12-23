@@ -22,9 +22,8 @@ class Client(models.Model):
 
 
     def status(self):
-        t = ClientTime()
-        h = t.sla_hours
-        p = t.time_percentage()
+        h = self.time().sla_hours
+        p = self.time().time_percentage()
 
         if h > 0:
             if (p <= 50) and (p > 15) and week_of_month() > 2:
@@ -37,10 +36,18 @@ class Client(models.Model):
                 return 'pause'
         return 'default'
 
+    def time(self):
+        return ClientTime.objects.get(client_id=self.client_id)
+
+    def owner(self):
+        o = ClientOwner.objects.get(client_id=self.client_id)
+
+        return o.project_owner
+
 
 class ClientTime(models.Model):
 
-    client = models.ForeignKey(Client, default=0, primary_key=True, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
     leftover_hours = models.IntegerField(default=0)
     extra_hours = models.IntegerField(default=0)
     sla_hours = models.FloatField(default=0)
@@ -77,7 +84,7 @@ class ClientTime(models.Model):
 
 class ClientOwner(models.Model):
 
-    client = models.ForeignKey(Client, primary_key=True, default=0, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
     project_owner = models.CharField(
         default="No owner", max_length=100, verbose_name="Project Owner"
     )

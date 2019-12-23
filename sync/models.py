@@ -35,7 +35,7 @@ class API(models.Model):
             if client['custom_fields']['client_owner'] is None:
                 client['custom_fields']['client_owner'] = 'No owner'
 
-            if isinstance(client['custom_fields']['sla_allowance_hours'], str):
+            if client['custom_fields']['sla_allowance_hours'] == 'tbc':
                 client['custom_fields']['sla_allowance_hours'] = 0
 
             print(f"Importing {client['name']}")
