@@ -6,12 +6,21 @@ from django.db import models
 from dashboard.helpers import week_of_month
 
 
+class ClientOwner(models.Model):
+
+    name = models.CharField(default="No owner", max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Client(models.Model):
     
     client_id = models.BigIntegerField(primary_key=True, default=0)
     name = models.CharField(
         default="Client Name", max_length=500, verbose_name="Client Name"
     )
+    product_owner = models.ForeignKey(ClientOwner, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
         return self.name
@@ -37,17 +46,17 @@ class Client(models.Model):
         return 'default'
 
     def time(self):
-        return ClientTime.objects.get(client_id=self.client_id)
+        return TimeSheet.objects.get(client_id=self.client_id)
 
     def owner(self):
-        o = ClientOwner.objects.get(client_id=self.client_id)
+        o = ClientOwner.objects.get(client=self.client_id)
 
-        return o.project_owner
+        return o.name
 
 
-class ClientTime(models.Model):
+class TimeSheet(models.Model):
 
-    client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, primary_key=True, default=0, on_delete=models.CASCADE)
     leftover_hours = models.IntegerField(default=0)
     extra_hours = models.IntegerField(default=0)
     sla_hours = models.FloatField(default=0)
@@ -81,10 +90,3 @@ class ClientTime(models.Model):
             return math.ceil(remainder)
 
         return 0
-
-class ClientOwner(models.Model):
-
-    client = models.ForeignKey(Client, default=0, on_delete=models.CASCADE)
-    project_owner = models.CharField(
-        default="No owner", max_length=100, verbose_name="Project Owner"
-    )
