@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404, JsonResponse
 from django.contrib.auth.decorators import login_required
-from dashboard.models import Client
+from dashboard.models import Client, TimeSheet, ClientOwner
 
 
 @login_required(login_url='/accounts/login/')

@@ -3,7 +3,7 @@ import os
 
 from datetime import timedelta
 from django.db import models
-from dashboard.models import Client
+from dashboard.models import Client, TimeSheet, ClientOwner
 from dashboard.helpers import month_first_day
 
 class API(models.Model):
@@ -35,16 +35,32 @@ class API(models.Model):
             if client['custom_fields']['client_owner'] is None:
                 client['custom_fields']['client_owner'] = 'No owner'
 
+            if client['custom_fields']['sla_allowance_hours'] == 'tbc':
+                client['custom_fields']['sla_allowance_hours'] = 0
+
             print(f"Importing {client['name']}")
 
+            try:
+                o = ClientOwner.objects.get(name=client['custom_fields']['client_owner'])
+            except:
+                o = ClientOwner(
+                    name=client['custom_fields']['client_owner']
+                )
+                o.save()
+                            
             c = Client(
                 client_id=client['id'], 
                 name=client['name'],
-                project_owner=client['custom_fields']['client_owner'],
+                product_owner=o
+            )
+            c.save()
+
+            t = TimeSheet(
+                client_id=client['id'],
                 sla_hours=client['custom_fields']['sla_allowance_hours'], 
                 time_spent=self._time_by_client(str(client['id']), str(month_first_day()))
             )
-            c.save()
+            t.save()
 
     def _time_by_client(self, client_id: str, start_time: str = ''):
         """Returns total tracked for for a client converted to minutes"""
@@ -61,7 +77,6 @@ class API(models.Model):
 
         return total / 3600
 
-    
     def _time_spent(self, time):
         """Adds all tracked time for a client"""
         tracked_time = []
