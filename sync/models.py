@@ -40,11 +40,14 @@ class API(models.Model):
 
             print(f"Importing {client['name']}")
 
-            o = ClientOwner(
-                name=client['custom_fields']['client_owner']
-            )
-            o.save()
-
+            try:
+                o = ClientOwner.objects.get(name=client['custom_fields']['client_owner'])
+            except:
+                o = ClientOwner(
+                    name=client['custom_fields']['client_owner']
+                )
+                o.save()
+                            
             c = Client(
                 client_id=client['id'], 
                 name=client['name'],

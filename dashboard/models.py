@@ -17,9 +17,7 @@ class ClientOwner(models.Model):
 class Client(models.Model):
     
     client_id = models.BigIntegerField(primary_key=True, default=0)
-    name = models.CharField(
-        default="Client Name", max_length=500, verbose_name="Client Name"
-    )
+    name = models.CharField(default="Client Name", max_length=500, verbose_name="Client Name")
     product_owner = models.ForeignKey(ClientOwner, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
