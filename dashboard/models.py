@@ -67,7 +67,7 @@ class TimeSheet(models.Model):
         if (self.extra_hours):
             return total + self.extra_hours
 
-        return total
+        return round(total, 1)
 
     def hours_remaining_label(self):
         hours = self.hours_remaining()

@@ -1,5 +1,6 @@
 import requests
 import os
+import math
 
 from datetime import timedelta
 from django.db import models
@@ -75,7 +76,7 @@ class API(models.Model):
                 minutes=int(t[3:])
             ).seconds
 
-        return total / 3600
+        return round(total / 3600, 1)
 
     def _time_spent(self, time):
         """Adds all tracked time for a client"""
