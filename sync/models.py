@@ -1,5 +1,6 @@
 import requests
 import os
+import math
 
 from datetime import timedelta
 from django.db import models
@@ -75,7 +76,10 @@ class API(models.Model):
                 minutes=int(t[3:])
             ).seconds
 
-        return total / 3600
+        """Using // rounds down to the nearest whole number efficiently. 
+           This method is more performant than Ceil because it is simple integer division.
+           This will NOT work with floats, only integers"""
+        return total // 3600
 
     def _time_spent(self, time):
         """Adds all tracked time for a client"""
