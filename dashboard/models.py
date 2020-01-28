@@ -1,7 +1,7 @@
 import math
 import datetime
 
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.db import models
 from dashboard.helpers import week_of_month
 
@@ -59,7 +59,7 @@ class TimeSheet(models.Model):
     extra_hours = models.IntegerField(default=0)
     sla_hours = models.FloatField(default=0)
     time_spent = models.FloatField(default=0)
-    import_date = models.DateField(default=datetime.date.today)
+    import_date = models.DateTimeField(default=datetime.now())
 
     def hours_remaining(self):
         total = float(self.sla_hours) - float(self.time_spent)
@@ -67,7 +67,7 @@ class TimeSheet(models.Model):
         if (self.extra_hours):
             return total + self.extra_hours
 
-        return round(total, 1)
+        return total
 
     def hours_remaining_label(self):
         hours = self.hours_remaining()
