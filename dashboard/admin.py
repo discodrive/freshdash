@@ -1,5 +1,12 @@
 from django.contrib import admin
 
-from .models import Client
+from .models import Client, TimeSheet
 
-admin.site.register(Client)
+
+class TimeSheetInlineAdmin(admin.TabularInline):
+    model = TimeSheet
+
+class ClientAdmin(admin.ModelAdmin):
+    inlines = [TimeSheetInlineAdmin]
+
+admin.site.register(Client, ClientAdmin)

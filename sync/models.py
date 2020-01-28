@@ -2,10 +2,10 @@ import requests
 import os
 import math
 
-from datetime import timedelta
+from datetime import timedelta, date, datetime
 from django.db import models
 from dashboard.models import Client, TimeSheet, ClientOwner
-from dashboard.helpers import month_first_day
+from dashboard.helpers import month_first_day, month_last_day
 
 class API(models.Model):
     
@@ -40,6 +40,7 @@ class API(models.Model):
                 client['custom_fields']['sla_allowance_hours'] = 0
 
             print(f"Importing {client['name']}")
+            print(month_first_day())
 
             try:
                 o = ClientOwner.objects.get(name=client['custom_fields']['client_owner'])
@@ -59,7 +60,8 @@ class API(models.Model):
             t = TimeSheet(
                 client_id=client['id'],
                 sla_hours=client['custom_fields']['sla_allowance_hours'], 
-                time_spent=self._time_by_client(str(client['id']), str(month_first_day()))
+                time_spent=self._time_by_client(str(client['id']), str(month_first_day())),
+                import_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             )
             t.save()
 

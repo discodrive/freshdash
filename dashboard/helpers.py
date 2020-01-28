@@ -1,3 +1,5 @@
+import calendar
+
 from datetime import date
 from math import ceil
 
@@ -7,6 +9,9 @@ def month_first_day():
     a, m = divmod(m-1, 12)
 
     return date(y+a, m+1, 1)
+
+def month_last_day():
+    return calendar.monthrange(date.today().year, date.today().month)[1]
 
 def week_of_month():
     today = date.today()
