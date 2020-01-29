@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+        
+{% block title %}{{ client.name }}{% endblock %}
+
+{% block content %}
+
+    <section class="section c-client-container">
+        <div class="container">
+            <h1 class="title is-3">{{ client.name }}</h1>
+            <a href="{{ SITE_URL }}">Back to clients list</a>
+        </div>
+    </section>
+
+{% endblock %}

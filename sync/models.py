@@ -3,6 +3,7 @@ import os
 import math
 
 from datetime import timedelta, date, datetime
+from django.utils.text import slugify
 from django.db import models
 from dashboard.models import Client, TimeSheet, ClientOwner
 from dashboard.helpers import month_first_day, month_last_day
@@ -40,7 +41,6 @@ class API(models.Model):
                 client['custom_fields']['sla_allowance_hours'] = 0
 
             print(f"Importing {client['name']}")
-            print(month_first_day())
 
             try:
                 o = ClientOwner.objects.get(name=client['custom_fields']['client_owner'])
@@ -53,6 +53,7 @@ class API(models.Model):
             c = Client(
                 client_id=client['id'], 
                 name=client['name'],
+                slug=slugify(client['name']),
                 product_owner=o
             )
             c.save()

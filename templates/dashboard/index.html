@@ -50,26 +50,28 @@
             <ul class="client-list">
                 {% for client in clients %}
                     <li class="c-single-client">
-                        <div class="inner status-{{ client.status }} med-padding">
-                            <div class="columns">
-                                <div class="column is-three-sixths c-client-name">
-                                    <h2 class="subtitle is-4">{{ client.name }}</h2>
-                                </div>
-                                <div class="column is-one-sixth c-client-time">
-                                    <span class="content is-medium">{{ client.time.time_spent }} / {{ client.time.sla_hours_label }}</span>
-                                </div>
-                                <div class="column is-one-sixth c-client-status">
-                                    <span class="has-text-weight-semibold">
-                                        {{ client.time.hours_remaining_label }}
-                                    </span>
-                                </div>
-                                <div class="column is-one-sixth c-project-owner">
-                                    <span class="has-text-weight-semibold">
-                                        {{ client.owner }}
-                                    </span>
+                        <a href="/client/{{ client.slug }}">
+                            <div class="inner status-{{ client.status }} med-padding">
+                                <div class="columns">
+                                    <div class="column is-three-sixths c-client-name">
+                                        <h2 class="subtitle is-4">{{ client.name }}</h2>
+                                    </div>
+                                    <div class="column is-one-sixth c-client-time">
+                                        <span class="content is-medium">{{ client.time.time_spent }} / {{ client.time.sla_hours_label }}</span>
+                                    </div>
+                                    <div class="column is-one-sixth c-client-status">
+                                        <span class="has-text-weight-semibold">
+                                            {{ client.time.hours_remaining_label }}
+                                        </span>
+                                    </div>
+                                    <div class="column is-one-sixth c-project-owner">
+                                        <span class="has-text-weight-semibold">
+                                            {{ client.owner }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 {% endfor %}
             </ul>

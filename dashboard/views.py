@@ -5,6 +5,14 @@ from dashboard.models import Client, TimeSheet, ClientOwner
 
 
 @login_required(login_url='/accounts/login/')
+def client(request, clientslug='no-client'):
+
+    client = Client.objects.get(slug=clientslug)
+    context = {'client': client}
+
+    return render(request, 'dashboard/client.html', context)
+
+@login_required(login_url='/accounts/login/')
 def index(request):
     sort_by = {
         'name' : 'name',

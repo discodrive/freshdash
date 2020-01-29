@@ -18,6 +18,7 @@ class Client(models.Model):
     
     client_id = models.BigIntegerField(primary_key=True, default=0)
     name = models.CharField(default="Client Name", max_length=500, verbose_name="Client Name")
+    slug = models.SlugField(default="client-slug", max_length=50)
     product_owner = models.ForeignKey(ClientOwner, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
