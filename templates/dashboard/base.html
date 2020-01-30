@@ -23,6 +23,16 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
+        <header class="c-global-head u-blue-black-bg">
+            <section class="header">
+                <div class="header__logo">
+                    <a href="https://freshdash.substrakt.com"><span class="u-substrakt-text">substrakt</span><span class="u-freshdash-text">freshdash</span></a>
+                </div>
+
+                <a href="{% url 'admin:index' %}" class="header__admin-link"><i class="fas fa-user"></i> <span>{{ user.username }}</span></a>
+            </section>
+        </header>
         
         {% block content %}{% endblock %}
     </body>

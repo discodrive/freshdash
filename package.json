@@ -19,6 +19,7 @@
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-babel": "^7.0.1",
+    "gulp-font": "^1.0.4",
     "gulp-uglify-es": "^1.0.4"
   },
   "devDependencies": {

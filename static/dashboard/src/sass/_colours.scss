@@ -7,8 +7,16 @@ $white: #ffffff;
 $black: #111111;
 $off-white: #141111;
 $off-black: #222222;
+$grey: #cccccc;
+$dark-blue: #2b364a;
 
 
 $red: #FC3C63;
 $green: #31CF65;
 $yellow: #FEDC63;
+$blue: #007bb6;
+
+.u-blue-black-bg {
+    background-color: $dark-blue;
+    color: $white;
+}

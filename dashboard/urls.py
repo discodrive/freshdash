@@ -7,5 +7,5 @@ app_name = "dashboard"
 urlpatterns = [
     path("", index, name="index"),
     path("client/", client, name="default-client"),
-    path("client/<slug:clientslug>/", client, name="client")
+    path("client/<slug:clientslug>/", client, name="client"),
 ]
