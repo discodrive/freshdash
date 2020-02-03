@@ -6,9 +6,27 @@
 
     <section class="section c-client-container">
         <div class="container">
-            <h1 class="title is-3">{{ client.name }}</h1>
-            <a href="{{ SITE_URL }}">Back to clients list</a>
+            <div class="columns is-three-quarters">
+                <div class="column">
+                    <div class="c-client-info">
+                        <h1 class="title is-3">{{ client.name }}</h1>
+                        <span class="c-client-location"><i class="fas fa-map-marker-alt"></i> {{ client.location }}</span>
+                        <a class="c-client-url" href="{{ client.url }}">Website</a> |
+                        <a class="c-client-freshdesk-url" href="https://substrakt.freshdesk.com/a/companies/{{ client.client_id }}">Freshdesk</a>
+                        <span class="c-client-owner">Client owner: {{ client.owner }}</span>
+                    </div>
+                </div>
+
+                <div class="column is-one-quarter">
+                    <a href="{% url 'dashboard:index' %}" class="c-btn c-btn-primary"><span><i class="fas fa-arrow-left"></i></span> All clients</a>
+                </div>
+            </div>
         </div>
+         <div class="container">
+            <section>
+                test
+            </section>
+         </div>
     </section>
 
 {% endblock %}

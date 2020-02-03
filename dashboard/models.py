@@ -17,10 +17,13 @@ class ClientOwner(models.Model):
 class Client(models.Model):
     
     client_id = models.BigIntegerField(primary_key=True, default=0)
+    location = models.CharField(default=None, max_length=500, verbose_name="Location", null=True)
     name = models.CharField(default="Client Name", max_length=500, verbose_name="Client Name")
-    slug = models.SlugField(default="client-slug", max_length=50)
     product_owner = models.ForeignKey(ClientOwner, on_delete=models.SET_NULL, null=True)
-    
+    slug = models.SlugField(default="client-slug", max_length=50)
+    ticketing_system = models.CharField(default=None, max_length=500, verbose_name="Ticketing System", null=True)
+    url = models.URLField(default=None, null=True)
+
     def __str__(self):
         return self.name
 

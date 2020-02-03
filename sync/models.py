@@ -52,9 +52,12 @@ class API(models.Model):
                             
             c = Client(
                 client_id=client['id'], 
+                location=client['custom_fields']['country'],
                 name=client['name'],
+                product_owner=o,
                 slug=slugify(client['name']),
-                product_owner=o
+                ticketing_system=client['custom_fields']['ticketing_system'],
+                url=client['custom_fields']['live_site_url']
             )
             c.save()
 

@@ -1,3 +1,5 @@
+// Main page client grid
+
 .state--client-grid, .state--client-list {
     .c-single-client {
         .inner {
@@ -62,6 +64,39 @@
             &.status-fine {
                 border:2px solid $green;
             }
+        }
+    }
+}
+
+// Single client page
+
+.c-client-container {
+    color:$dark-grey;
+    .c-btn-primary {
+        float:right;
+        padding:11px 20px 11px 55px;
+        position:relative;
+        width:150px;
+        span {
+            left:1.5rem;
+            position:absolute;
+            -webkit-transition: all 250ms ease-in-out;
+            -moz-transition: all 250ms ease-in-out;
+            -ms-transition: all 250ms ease-in-out;
+            -o-transition: all 250ms ease-in-out;
+            transition: all 250ms ease-in-out;
+        }
+        &:hover {
+            color:$white;
+            span {
+                left:1.3rem;
+            }
+        }
+    }
+    .c-client-info {
+        .c-client-location {
+            display:block;
+            font-size:1.3em
         }
     }
 }
