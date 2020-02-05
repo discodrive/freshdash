@@ -5,7 +5,7 @@ import math
 from datetime import timedelta, date, datetime
 from django.utils.text import slugify
 from django.db import models
-from dashboard.models import Client, TimeSheet, ClientOwner
+from dashboard.models import Client, TimeSheet, ClientOwner, Ticket
 from dashboard.helpers import month_first_day, month_last_day
 
 class API(models.Model):
@@ -17,9 +17,9 @@ class API(models.Model):
         return (f'{self.__class__.__name__}('
                 f'{self.name!r})')
 
-    def get(self, endpoint: str = '', perpage: str = ''):
+    def get(self, endpoint: str = '', params: str = ''):
         r = requests.get(
-            "https://substrakt.freshdesk.com/api/v2/"+ endpoint + perpage,
+            "https://substrakt.freshdesk.com/api/v2/"+ endpoint + params,
             auth=(os.getenv("FRESHDESK_AUTH"), "x")
         )
         
@@ -68,6 +68,24 @@ class API(models.Model):
                 import_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             )
             t.save()
+
+    def ticket_sync(self, request):
+        for ticket in request:
+
+            try:
+                ticket = Ticket.objects.get(id=ticket['id'])
+            except:
+                print(f"{ticket['subject']}")
+
+                ticket = Ticket(
+                    id=ticket['id'],
+                    client_id=ticket['company_id'],
+                    date=ticket['created_at'],
+                    priority=ticket['priority'],
+                    status=ticket['status'],
+                    subject=ticket['subject']
+                )
+                ticket.save()
 
     def _time_by_client(self, client_id: str, start_time: str = ''):
         """Returns total tracked for for a client converted to minutes"""

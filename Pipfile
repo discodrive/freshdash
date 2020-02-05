@@ -16,6 +16,7 @@ gunicorn = "*"
 dj-database-url = "*"
 whitenoise = "*"
 django-widget-tweaks = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"

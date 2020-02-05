@@ -1,5 +1,6 @@
 from sync.models import API
 from django.core.management.base import BaseCommand, CommandError
+from dashboard.models import Client
 
 class Command(BaseCommand):
 
@@ -13,14 +14,25 @@ class Command(BaseCommand):
         parser.add_argument(
             '--perpage',
             default='',
-            help='Specify a number of items per page', 
+            help='Specify a number of items per page',
+        )
+
+        parser.add_argument(
+            '--fromdate',
+            default='',
+            help='Specify a start date for retrieving tickets',
         )
 
     def handle(self, *args, **options):
         api = API('freshdesk')
-        perpage = ''
+        params = ''
 
         if options['perpage']:
-            perpage = '?per_page=' + options['perpage']
-            
-        return api.sync(api.get(options['endpoint'], perpage))
+            params = '?per_page=' + options['perpage']
+        elif options['fromdate']:
+            params = '?query=' + options['fromdate']
+
+        if options['endpoint'] == 'companies':
+            return api.sync(api.get(options['endpoint'], params))
+        elif options['endpoint'] == 'tickets':
+            return api.ticket_sync(api.get(options['endpoint'], params))

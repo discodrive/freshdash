@@ -10,9 +10,11 @@
                 <div class="column">
                     <div class="c-client-info">
                         <h1 class="title is-3">{{ client.name }}</h1>
-                        <span class="c-client-location"><i class="fas fa-map-marker-alt"></i> {{ client.location }}</span>
-                        <a class="c-client-url" href="{{ client.url }}">Website</a> |
-                        <a class="c-client-freshdesk-url" href="https://substrakt.freshdesk.com/a/companies/{{ client.client_id }}">Freshdesk</a>
+                        <span class="c-client-location"><i class="fas fa-map-marker-alt"></i> {{ client.location }} - </span>
+                        <div class="c-client-links">
+                            <a class="c-client-url c-link" href="{{ client.url }}">Website</a> |
+                            <a class="c-client-freshdesk-url c-link" href="https://substrakt.freshdesk.com/a/companies/{{ client.client_id }}">Freshdesk</a>
+                        </div>
                         <span class="c-client-owner">Client owner: {{ client.owner }}</span>
                     </div>
                 </div>

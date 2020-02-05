@@ -3,6 +3,7 @@ import datetime
 
 from datetime import timedelta, datetime
 from django.db import models
+from django.utils import timezone
 from dashboard.helpers import week_of_month
 
 
@@ -56,6 +57,19 @@ class Client(models.Model):
         return o.name
 
 
+class Ticket(models.Model):
+
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
+    date = models.DateTimeField(default=timezone.now)
+    priority = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
+    subject = models.CharField(default="Subject", max_length=500, verbose_name="Subject")
+
+
+    def __str__(self):
+        return self.subject
+
+
 class TimeSheet(models.Model):
 
     client = models.ForeignKey(Client, primary_key=True, default=0, on_delete=models.CASCADE)
@@ -63,7 +77,7 @@ class TimeSheet(models.Model):
     extra_hours = models.IntegerField(default=0)
     sla_hours = models.FloatField(default=0)
     time_spent = models.FloatField(default=0)
-    import_date = models.DateTimeField(default=datetime.now())
+    import_date = models.DateTimeField(default=timezone.now)
 
     def hours_remaining(self):
         total = float(self.sla_hours) - float(self.time_spent)

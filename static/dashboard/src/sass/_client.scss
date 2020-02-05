@@ -94,9 +94,17 @@
         }
     }
     .c-client-info {
-        .c-client-location {
+        h1 {
+            margin-bottom:10px;
+        }
+
+        .c-client-location, .c-client-links {
+            display:inline-block;
+            font-size:1.1em;
+            font-weight:bold;
+        }
+        .c-client-owner {
             display:block;
-            font-size:1.3em
         }
     }
 }
