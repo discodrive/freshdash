@@ -55,19 +55,25 @@
                                     <div class="column is-three-sixths c-client-name">
                                         <h2 class="subtitle is-4">{{ client.name }}</h2>
                                     </div>
-                                    <div class="column is-one-sixth c-client-time">
-                                        <span class="content is-medium">{{ client.time.time_spent }} / {{ client.time.sla_hours_label }}</span>
-                                    </div>
-                                    <div class="column is-one-sixth c-client-status">
-                                        <span class="has-text-weight-semibold">
-                                            {{ client.time.hours_remaining_label }}
-                                        </span>
-                                    </div>
+
+                                    {% for t in client.timesheet_set.all %}
+                                        <div class="column is-one-sixth c-client-time">
+                                            <span class="content is-medium">{{ t.time_spent }} / {{ t.sla_hours_label }}</span>
+                                        </div>
+                                        <div class="column is-one-sixth c-client-status">
+                                            <span class="has-text-weight-semibold">
+                                                {{ t.hours_remaining_label }}
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+
+                                    {% for c in client.clientowner_set.all %}
                                     <div class="column is-one-sixth c-project-owner">
                                         <span class="has-text-weight-semibold">
-                                            {{ client.owner }}
+                                            {{ c.name }}
                                         </span>
                                     </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </a>

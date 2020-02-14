@@ -46,7 +46,7 @@ class Client(models.Model):
                 return 'fine'
             elif (p == 0):
                 return 'pause'
-        return 'default'
+        return 'default' 
 
     def time(self):
         return TimeSheet.objects.get(client_id=self.client_id)

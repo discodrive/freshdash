@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.http import Http404, JsonResponse
 from django.contrib.auth.decorators import login_required
-from dashboard.models import Client, TimeSheet, ClientOwner
+from dashboard.models import Client, TimeSheet, ClientOwner, Ticket
 
 
 @login_required(login_url='/accounts/login/')
 def client(request, clientslug='no-client'):
 
     client = Client.objects.get(slug=clientslug)
-    context = {'client': client}
+    tickets = client.ticket_set.all()
+    context = {'client': client, 'tickets': tickets}
 
     return render(request, 'dashboard/client.html', context)
 
