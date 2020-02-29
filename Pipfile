@@ -17,6 +17,8 @@ dj-database-url = "*"
 whitenoise = "*"
 django-widget-tweaks = "*"
 matplotlib = "*"
+gspread = "*"
+oauth2client = "*"
 
 [requires]
 python_version = "3.7"

@@ -31,17 +31,14 @@
         <div class="container">
             <div class="headings med-padding is-hidden-touch">
                 <div class="columns">
-                    <div class="column is-three-sixths">
+                    <div class="column is-three-fifths">
                         <span class="title is-3">Clients</span>
                     </div>
-                    <div class="column is-one-sixth">
+                    <div class="column is-one-fifth">
                         <span class="title is-3">Hours spent</span>
                     </div>
-                    <div class="column is-one-sixth">
+                    <div class="column is-one-fifth">
                         <span class="title is-3">Over/Under</span>
-                    </div>
-                    <div class="column is-one-sixth">
-                        <span class="title is-3">Product owner</span>
                     </div>
                 </div>
             </div>
@@ -52,27 +49,19 @@
                         <a href="/client/{{ client.slug }}">
                             <div class="inner status-{{ client.status }} med-padding">
                                 <div class="columns">
-                                    <div class="column is-three-sixths c-client-name">
+                                    <div class="column is-three-fifths c-client-name">
                                         <h2 class="subtitle is-4">{{ client.name }}</h2>
                                     </div>
 
                                     {% for t in client.timesheet_set.all %}
-                                        <div class="column is-one-sixth c-client-time">
+                                        <div class="column is-one-fifth c-client-time">
                                             <span class="content is-medium">{{ t.time_spent }} / {{ t.sla_hours_label }}</span>
                                         </div>
-                                        <div class="column is-one-sixth c-client-status">
+                                        <div class="column is-one-fifth c-client-status">
                                             <span class="has-text-weight-semibold">
                                                 {{ t.hours_remaining_label }}
                                             </span>
                                         </div>
-                                    {% endfor %}
-
-                                    {% for c in client.clientowner_set.all %}
-                                    <div class="column is-one-sixth c-project-owner">
-                                        <span class="has-text-weight-semibold">
-                                            {{ c.name }}
-                                        </span>
-                                    </div>
                                     {% endfor %}
                                 </div>
                             </div>

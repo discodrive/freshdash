@@ -69,6 +69,22 @@ class Ticket(models.Model):
     def __str__(self):
         return self.subject
 
+    def priorityLabel(self):
+        return {
+            1: 'low',
+            2: 'medium',
+            3: 'high',
+            4: 'urgent'   
+        }.get(self.priority, 'None')
+
+    def statusLabel(self):
+        return {
+            2: 'Open', 
+            3: 'Pending',
+            4: 'Resolved',
+            5: 'Closed'
+        }.get(self.status, 'None')
+
 
 class TimeSheet(models.Model):
 

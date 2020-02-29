@@ -30,7 +30,7 @@
                         <h2>Recent Tickets <a href="https://substrakt.freshdesk.com/a/companies/{{ client.client_id }}"><i class="fas fa-list"></i> All tickets</a></h2>
                         <ul>
                         {% for ticket in tickets %}
-                            <li><a href="https://substrakt.freshdesk.com/a/tickets/{{ ticket.id }}">{{ ticket.subject }}</a></li>
+                            <li class="c-ticket-priority-{{ ticket.priorityLabel }}"><a href="https://substrakt.freshdesk.com/a/tickets/{{ ticket.id }}">{{ ticket.subject }}</a> <span>{{ ticket.statusLabel }}</span></li>
                         {% endfor %}     
                         </ul>
                     </section>
