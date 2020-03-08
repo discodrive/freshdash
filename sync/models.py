@@ -1,10 +1,13 @@
 import requests
 import os
 import math
+import gspread
 
 from datetime import timedelta, date, datetime
 from django.utils.text import slugify
+from django.conf import settings
 from django.db import models
+from oauth2client.service_account import ServiceAccountCredentials
 from dashboard.models import Client, TimeSheet, ClientOwner, Ticket
 from dashboard.helpers import month_first_day, month_last_day
 
@@ -110,3 +113,23 @@ class API(models.Model):
                 tracked_time.append(time_spent.get('time_spent', 0))
 
         return tracked_time
+
+class GoogleDrive(models.Model):
+    
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'{self.name!r})')
+
+    def spreadsheet(self):
+        scope = ['https://spreadsheets.google.com/feeds']
+        json = os.path.join(str(settings.STATICFILES_DIRS), '/dashboard/build/json/', 'client_secret.json')
+        creds = ServiceAccountCredentials.from_json_keyfile_name(json, scope)
+        client = gspread.authorize(creds)
+
+        sheet = client.open("Substrakt - Client Services Maintenance").sheet1
+
+        list_of_hashes = sheet.get_all_records()
+        print(list_of_hashes)
