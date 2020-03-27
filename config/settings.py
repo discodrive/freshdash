@@ -133,9 +133,7 @@ STATICFILES_DIRS = (
     '/dashboard/',
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-test
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
