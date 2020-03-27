@@ -20,7 +20,5 @@ def main():
 
 
 if __name__ == '__main__':
-    try:
-        dotenv.read_dotenv()
-    except:
-        pass
+    dotenv.read_dotenv()
+    main()
