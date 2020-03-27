@@ -1,0 +1,56 @@
+@mixin link-underline {
+    display: inline;
+    text-decoration: none;
+    background-image: linear-gradient(transparent calc(100% - 4px),rgba($blue, 0.3) calc(100% - 4px),rgba($blue, 0.3) calc(100% - 2px),transparent calc(100% - 2px));
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition: background-size 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0s;
+    padding-bottom: 0.2em;
+    &:hover, 
+    &:focus {
+        background-size: 0 100%;
+    }
+}
+
+body {
+    background-color:$smoke;
+}
+
+a.c-link {
+    color: $blue;
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    transition: all 150ms ease;
+    @include transition();
+    @include link-underline();
+    &:hover {
+        opacity: 0.8;
+    }
+    &:hover:after {
+        opacity: 0.5;
+    }
+}
+
+.c-white-block {
+    background:$white;
+    padding:20px 30px;
+    a {
+        color:$blue;
+    }
+    h2 {
+        border-bottom:2px solid $grey;
+        color:$slate;
+        font-weight:bold;
+        margin:0 0 30px 0;
+        padding:0 0 5px 0;
+        a {
+            float:right;
+            svg {
+                margin-right:5px;
+            }
+        }
+    }
+}
+

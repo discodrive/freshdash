@@ -1,0 +1,133 @@
+// Main page client grid
+
+.state--client-grid, .state--client-list {
+    .c-single-client {
+        .inner {
+            &.status-pause {
+                background:#ECF0F1;
+                color:#bbbbbb;
+                position:relative;
+                .subtitle, span {
+                    color:#bbbbbb;
+                }
+                .c-client-name {
+                    h2 {
+                        padding-left:50px;
+                    }
+                }
+                &:before {
+                    content:"\f28b";
+                    font-family: "FontAwesome";
+                    font-size:1.6em;
+                    margin-top:-3px;
+                    position:absolute;
+                }
+            }
+            
+        }
+    }
+}
+
+.state--client-grid {
+    .c-single-client {
+        .inner {
+            border:2px solid $slate;
+            &.status-warning {
+                border-top:4px solid $yellow;
+            }
+            &.status-critical {
+                border-top:4px solid $red;
+            }
+            &.status-fine {
+                border-top:4px solid $green;
+            }
+        }
+        .columns {
+            flex-direction:column;
+            .c-client-name, .c-client-time, .c-client-status {
+                width:100%;
+            }
+        }
+    }
+}
+
+.state--client-list {
+    .c-single-client {
+        margin-bottom:20px;
+        .inner {
+            background-color:$white;
+            border:2px solid #BBBBBB;
+            &.status-warning {
+                border:2px solid $yellow;
+            }
+            &.status-critical {
+                border:2px solid $red;
+            }
+            &.status-fine {
+                border:2px solid $green;
+            }
+        }
+    }
+}
+
+// Single client page
+
+.c-client-container {
+    color:$dark-grey;
+    .c-btn-primary {
+        float:right;
+        padding:11px 20px 11px 55px;
+        position:relative;
+        width:150px;
+        span {
+            left:1.5rem;
+            position:absolute;
+            -webkit-transition: all 250ms ease-in-out;
+            -moz-transition: all 250ms ease-in-out;
+            -ms-transition: all 250ms ease-in-out;
+            -o-transition: all 250ms ease-in-out;
+            transition: all 250ms ease-in-out;
+        }
+        &:hover {
+            color:$white;
+            span {
+                left:1.3rem;
+            }
+        }
+    }
+    .c-client-info {
+        margin-bottom:40px;
+        h1 {
+            margin-bottom:10px;
+        }
+        .c-client-location, .c-client-links {
+            display:inline-block;
+            font-size:1.1em;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+        .c-client-owner {
+            color:$slate;
+            display:block;
+            font-weight:bold;
+        }
+    }
+}
+
+.c-client-tickets {
+    ul {
+        li {
+            margin-bottom:1rem;
+            span {
+                float:right;
+            }
+        }
+    }
+}
+
+.c-client-config {
+    svg {
+        float:right;
+    }
+}
+

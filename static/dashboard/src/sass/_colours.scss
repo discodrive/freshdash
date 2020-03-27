@@ -1,0 +1,25 @@
+///* ========================================================================
+//   #COLOURS
+//   ======================================================================== */
+// The list of colour variables used globally across the project
+
+$white: #ffffff;
+$black: #111111;
+$off-white: #141111;
+$off-black: #222222;
+$smoke: #F5F5F5;
+$grey: #cccccc;
+$slate: #707F94;
+$dark-grey: #424852;
+$dark-blue: #2b364a;
+
+
+$red: #FC3C63;
+$green: #31CF65;
+$yellow: #FEDC63;
+$blue: #007bb6;
+
+.u-blue-black-bg {
+    background-color: $dark-blue;
+    color: $white;
+}

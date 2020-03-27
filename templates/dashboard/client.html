@@ -1,0 +1,69 @@
+{% extends "dashboard/base.html" %}
+        
+{% block title %}{{ client.name }}{% endblock %}
+
+{% block content %}
+
+    <section class="section c-client-container">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-three-quarters">
+                    <div class="c-client-info">
+                        <h1 class="title is-3">{{ client.name }}</h1>
+                        <span class="c-client-location"><i class="fas fa-map-marker-alt"></i> {{ client.location }} - </span>
+                        <div class="c-client-links">
+                            <a class="c-client-url c-link" href="{{ client.url }}">Website</a>
+                        </div>
+                        <span class="c-client-owner">Client owner: {{ client.owner }}</span>
+                    </div>
+                </div>
+
+                <div class="column is-one-quarter">
+                    <a href="{% url 'dashboard:index' %}" class="c-btn c-btn-primary"><span><i class="fas fa-arrow-left"></i></span> All clients</a>
+                </div>
+            </div>
+        </div>
+         <div class="container">
+            <div class="columns"> 
+                {% if tickets %}
+                    <div class="column is-half-desktop">
+                        <section class="c-client-tickets c-white-block">
+                            <h2>Recent Tickets <a href="https://substrakt.freshdesk.com/a/companies/{{ client.client_id }}"><i class="fas fa-list"></i> All tickets</a></h2>
+                            <ul>
+                            {% for ticket in tickets %}
+                                <li class="c-ticket-priority-{{ ticket.priorityLabel }}"><a href="https://substrakt.freshdesk.com/a/tickets/{{ ticket.id }}">{{ ticket.subject }}</a> <span>{{ ticket.statusLabel }}</span></li>
+                            {% endfor %}     
+                            </ul>
+                        </section>
+                    </div>
+                {% endif %}
+                <div class="column is-half-desktop">
+                    <section class="c-client-config c-white-block">
+                        <h2>Site configuration <i class="fas fa-wrench"></i></h2>
+                        <table class="table is-striped is-fullwidth is-hoverable">
+                            <tbody>
+                                <tr>
+                                    <th>Wordpress</th>
+                                    <td>{{ client.wp_version }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Attendable</th>
+                                    <td>{{ client.attendable_version }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Onsale</th>
+                                    <td>{{ client.onsale_version }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Baseproject</th>
+                                    <td>{{ client.baseproject }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section
+                </div>
+            </div>
+         </div>
+    </section>
+
+{% endblock %}

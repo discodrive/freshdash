@@ -1,0 +1,53 @@
+.c-global-head {
+    font-family:"Neuzeit Office", sans-serif;
+    height:100px;
+    .header {
+        z-index: 10;
+        transition: all 250ms ease-out;
+        font-size: 100%;
+        font-weight: 900;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        @media (min-width: 62.5em) {
+            height: 100px;
+        }
+        .header__logo {
+            font-size: 120%;
+            margin-left: 5%;
+            a {
+                color:$white;
+                .u-substrakt-text {
+                    position:relative;
+                    &:before {
+                        content: '‑';
+                        position: absolute;
+                        top: -0.6em;
+                        left: 0.08em;
+                    }
+                }
+                .u-freshdash-text {
+                    font-weight:100;
+                }
+            }
+        }
+        .header__admin-link {
+            color:$white;
+            margin-right:5%;  
+            span {
+                color:$grey;
+                margin-left:5px;
+            }
+            &:hover {
+                span {
+                    color:$white;
+                }
+            }
+        }
+    }
+}

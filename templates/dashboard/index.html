@@ -1,0 +1,105 @@
+{% extends "dashboard/base.html" %}
+        
+{% block title %}Clients{% endblock %}
+
+{% block content %}
+
+    <section class="section c-filters">
+        <div class="container">
+            <div class="view-controls med-padding">
+                <div class="columns is-mobile">
+                    <div class="column is-one-third-desktop">
+                        <div class="c-view">
+                            <p>View as</p>
+                            <a class="c-event-toggle__list"><i class="fas fa-list"></i> <span>List</span></a>
+                            <a class="c-event-toggle__grid"><i class="fas fa-grip-horizontal"></i> <span>Grid</span></a>
+                        </div>
+                    </div>
+                    <div class="column is-two-thirds-desktop">
+                        <div class="c-filter is-pulled-right">
+                            <p>Filter by client owner</p>
+                            <div class="control has-icons-left">
+                                <form action="" method="get">
+                                    <div class="select">
+                                        <select name="owner" onchange="this.form.submit()">
+                                            <option>--</option>
+                                            {% for owner in owners %}
+                                                <option value="{{ owner.id }}">{{ owner.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <span class="icon is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="c-filter is-pulled-right">
+                            <p>Filter by location</p>
+                            <div class="control has-icons-left">
+                                <form action="" method="get">
+                                    <div class="select">
+                                        <select name="location" onchange="this.form.submit()">
+                                            <option>--</option>
+                                            <option value="UK">UK</option>
+                                            <option value="North America">North America</option>
+                                        </select>
+                                    </div>
+                                    <span class="icon is-left">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section c-clients-list state--client-list">
+        <div class="container">
+            <div class="headings med-padding is-hidden-touch">
+                <div class="columns">
+                    <div class="column is-three-fifths">
+                        <span class="title is-3">Clients</span>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <span class="title is-3">Hours spent</span>
+                    </div>
+                    <div class="column is-one-fifth">
+                        <span class="title is-3">Over/Under</span>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="client-list">
+                {% for client in clients %}
+                    <li class="c-single-client">
+                        <a href="/client/{{ client.slug }}">
+                            <div class="inner status-{{ client.status }} med-padding">
+                                <div class="columns">
+                                    <div class="column is-three-fifths c-client-name">
+                                        <h2 class="subtitle is-4">{{ client.name }}</h2>
+                                    </div>
+
+                                    {% for t in client.timesheet_set.all %}
+                                        <div class="column is-one-fifth c-client-time">
+                                            <span class="content is-medium">{{ t.time_spent }} / {{ t.sla_hours_label }}</span>
+                                        </div>
+                                        <div class="column is-one-fifth c-client-status">
+                                            <span class="has-text-weight-semibold">
+                                                {{ t.hours_remaining_label }}
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}
