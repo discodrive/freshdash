@@ -21,12 +21,7 @@
                             <div class="control has-icons-left">
                                 <form action="" method="get">
                                     <div class="select">
-                                        <select name="owner" onchange="this.form.submit()">
-                                            <option>--</option>
-                                            {% for owner in owners %}
-                                                <option value="{{ owner.id }}">{{ owner.name }}</option>
-                                            {% endfor %}
-                                        </select>
+                                        {{ owner }}
                                     </div>
                                     <span class="icon is-left">
                                         <i class="fas fa-user"></i>
@@ -40,12 +35,9 @@
                             <div class="control has-icons-left">
                                 <form action="" method="get">
                                     <div class="select">
-                                        <select name="location" onchange="this.form.submit()">
-                                            <option>--</option>
-                                            <option value="UK">UK</option>
-                                            <option value="North America">North America</option>
-                                        </select>
+                                        {{ location }}
                                     </div>
+                                    
                                     <span class="icon is-left">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </span>
