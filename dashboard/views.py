@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import Http404, JsonResponse
+from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 from dashboard.models import Client, TimeSheet, ClientOwner, Ticket
+from dashboard.forms import LocationFilterForm, OwnerFilterForm
 
 
 @login_required(login_url='/accounts/login/')
@@ -25,19 +27,33 @@ def index(request):
     clients = Client.objects.all().order_by('name')
     owners = ClientOwner.objects.all()
 
-    if request.GET.get('location'):
-        location = request.GET.get('location')
-        clients = Client.objects.filter(location=location).order_by('name')
-    elif request.GET.get('owner'):
-        owner = request.GET.get('owner')
-        clients = Client.objects.filter(product_owner=owner).order_by('name')
+    location_form = LocationFilterForm(request.GET or None)
+    owner_form = OwnerFilterForm(
+        request.GET or None, 
+        initial={'6': 'No owner'}
+    )
 
-    # for key, value in sort_by.items():
-    #     if query and query['sort'] == key:
-    #         clients = clients.order_by(value)
-            # clients.sort(key=lambda x: getattr(x, value)())
+    if request.method == "GET":
+        if location_form.is_valid():
+            try:
+                if request.GET.get('location'):
+                    location = request.GET.get('location')
+                    clients = Client.objects.filter(location=location).order_by('name')
+            except IntegrityError as e:
+                print(e)
+        if owner_form.is_valid():
+            try:
+                if request.GET.get('owner'):
+                    owner = request.GET.get('owner')
+                    clients = Client.objects.filter(product_owner=owner).order_by('name')
+            except IntegrityError as e:
+                print(e)
 
-    context = {'clients': clients,  'owners': owners}
+    context = {
+        'clients': clients,  
+        'owner': owner_form,
+        'location': location_form
+    }
 
     return render(request, 'dashboard/index.html', context)
 
