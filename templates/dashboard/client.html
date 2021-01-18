@@ -47,20 +47,46 @@
                                     <td>{{ client.wp_version }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Attendable</th>
-                                    <td>{{ client.attendable_version }}</td>
-                                </tr>
-                                <tr>
                                     <th>Onsale</th>
                                     <td>{{ client.onsale_version }}</td>
                                 </tr>
                                 <tr>
                                     <th>Baseproject</th>
-                                    <td>{{ client.baseproject }}</td>
+                                    <td>
+                                        {% if client.baseproject %}
+                                            <i class="far fa-check-circle has-text-success"></i> Yes 
+                                        {% else %}
+                                            <i class="far fa-times-circle has-text-danger"></i> No
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </section
+                    </section>
+
+                    <section class="c-client-config c-white-block">
+                        <h2>Events and sync <i class="fas fa-ticket-alt"></i></h2>
+                        <table class="table is-striped is-fullwidth is-hoverable">
+                            <tbody>
+                                <tr>
+                                    <th>Ticketing System</th>
+                                    <td>{{ client.ticketing_system }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Attendable</th>
+                                    <td>{{ client.attendable_version }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Events Sync</th>
+                                    <td><i class="far fa-clock"></i> {{ client.event_sync }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Availability Sync</th>
+                                    <td><i class="far fa-clock"></i> {{ client.availability_sync }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
             </div>
          </div>

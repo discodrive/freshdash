@@ -126,8 +126,18 @@
 }
 
 .c-client-config {
-    svg {
-        float:right;
+    h2 {
+        svg {
+            float:right;
+        }
+    }
+    th {
+        width: 50%;
+    }
+    tr {
+        svg {
+            margin-right: 5px;
+        }
     }
 }
 

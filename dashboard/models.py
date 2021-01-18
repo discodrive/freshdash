@@ -28,6 +28,8 @@ class Client(models.Model):
     attendable_version = models.CharField(default=None, max_length=500, verbose_name="Attendable Version", null=True)
     onsale_version = models.CharField(default=None, max_length=500, verbose_name="Onsale Version", null=True)
     baseproject = models.BooleanField(default=False)
+    event_sync = models.CharField(default=None, max_length=500, verbose_name="Events and Instances Sync", null=True)
+    availability_sync =  models.CharField(default=None, max_length=500, verbose_name="Availability Sync", null=True)
 
     def __str__(self):
         return self.name
@@ -60,6 +62,10 @@ class Client(models.Model):
 
         return o.name
 
+class Lighthouse(models.Model):
+
+    def __str__(self):
+        return self.date
 
 class Ticket(models.Model):
 
